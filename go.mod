@@ -1,3 +1,3 @@
-module github.com/syauqylei/scrapper
+module github.com/syauqylei/tokpedScraper
 
 go 1.18
