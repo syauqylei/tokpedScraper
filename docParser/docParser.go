@@ -1,7 +1,9 @@
 package docParser
 
 import (
+	"encoding/csv"
 	"log"
+	"os"
 	"strconv"
 
 	"github.com/PuerkitoBio/goquery"
@@ -81,4 +83,24 @@ func ParsePhones(c *docLoader.DocLoaderCtx) []phone.Phone {
 	}
 
 	return phones
+}
+
+func SaveToCsv(phones []phone.Phone, fname string) {
+	file, err := os.Create(fname)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	csvwriter := csv.NewWriter(file)
+	defer csvwriter.Flush()
+
+	header := []string{"name", "description", "image_link", "store", "rating", "price"}
+	csvwriter.Write((header))
+	var data [][]string
+	for _, record := range phones {
+		row := []string{record.Name, record.Description, record.ImageLink,
+			record.Store, strconv.Itoa(record.Rating), strconv.FormatInt(record.Price, 10)}
+		data = append(data, row)
+	}
+	csvwriter.WriteAll(data)
 }
