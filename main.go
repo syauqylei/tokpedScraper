@@ -12,5 +12,5 @@ func main() {
 	htmlCtx := docLoader.GetDocs(&c)
 	phones := docParser.ParsePhones(htmlCtx)
 	docParser.SaveToCsv(phones, "tokped100.csv")
-	fmt.Println(len(phones))
+	fmt.Println("done")
 }
