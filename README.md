@@ -7,5 +7,7 @@
 ### or build and run the binary
 
 > go mod tidy
+
 > go build .
+
 > ./tokpedScraper
